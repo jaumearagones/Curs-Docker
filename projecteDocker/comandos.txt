@@ -1,0 +1,6 @@
+- Creació projecte:
+
+1.- docker build -t todo-builder .
+2.- docker run -it --rm -v ${PWD}:/app todo-builder "npm create vue@latest"
+3.- docker run -it --rm -v ${PWD}/todo-front:/app todo-builder "npm install"
+4.- docker run -it --rm -p 5173:5173 -v ${pwd}/todo-front:/app todo-builder "npm run dev"

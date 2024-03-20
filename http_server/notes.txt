@@ -1,0 +1,5 @@
+docker build -t http_server_container .
+
+docker run --rm -it http_server_container -h
+
+docker run -it -v ${PWD}/web:/app -p 8080:8080 --rm http_server_container /app 8080

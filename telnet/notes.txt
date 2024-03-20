@@ -1,0 +1,3 @@
+docker build -t telnet_container .
+
+docker run --rm -it telnet_container www.ua.es 443
