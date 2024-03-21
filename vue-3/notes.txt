@@ -1,0 +1,11 @@
+docker build -t dev -f Dockerfile.dev .
+
+docker build -t prod -f Dockerfile.prod .
+
+docker run -it -v ${pwd}:/app  -p 5173:5173 --rm dev npm install
+
+docker run -it -v ${pwd}:/app  -p 5173:5173 --rm dev
+
+docker run -it -v ${pwd}:/app  -p 5173:5173 --rm dev npm run build
+
+docker run -it -v ${PWD}:/app  -p 80:80 --rm prod

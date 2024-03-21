@@ -1,4 +1,5 @@
 FROM node as base
+WORKDIR /app
 COPY . /app
 RUN npm install 
 
