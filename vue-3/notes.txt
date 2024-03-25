@@ -1,11 +1,16 @@
-docker build -t dev -f Dockerfile.dev .
+docker build -t vue-dev -f Dockerfile.dev . 
 
-docker build -t prod -f Dockerfile.prod .
+docker run -it --rm -v ${pwd}:/app  -p 5173:5173 vue-dev "npm install"
+# l'executes 1 vegada al principi i cada volta que package.json canvie.
 
-docker run -it -v ${pwd}:/app  -p 5173:5173 --rm dev npm install
+docker run -it -v ${pwd}:/app  -p 5173:5173 --rm vue-dev
+# per desenvolupar (hot-reloading)
 
-docker run -it -v ${pwd}:/app  -p 5173:5173 --rm dev
+docker run -it -v ${pwd}:/app  -p 5173:5173 --rm vue-dev npm run build
+# per compilar per a prod
 
-docker run -it -v ${pwd}:/app  -p 5173:5173 --rm dev npm run build
+docker build -t jaumearagones/vue-prod:1.0.0 -f Dockerfile.prod .
+# Sempre que es fa un build de una imatge "de prod", el nom de la imatge ha de ser <namespace>/<image_name>:<tag>. 
 
-docker run -it -v ${PWD}:/app  -p 80:80 --rm prod
+docker run -d -p 80:80 --rm vue-prod
+# No cal fer volum, els fitxers estan muntats al crear la imatge. s'executa amb -d (detached)
