@@ -1,0 +1,40 @@
+services:
+  todo-front:
+    container_name: todo-front
+    stdin_open: true
+    tty: true
+    networks: 
+        - todo-web
+    ports:
+      - 5173:5173
+    volumes:
+      - "./todo-front:/app"
+    build: todo-front
+    command: '"npm run dev"'
+      # depends_on:
+      #   - todo-api
+    # todo-api:
+    # container_name: todo-api
+    #   build: todo-api
+    #   volumes:
+    #     - "./todo-api:/app"
+    #   networks: 
+    #     - todo-bd
+    #     - todo-web
+    #   ports:
+    #     - "8080:8080"
+    #   expose:
+    #     - "8080"
+    #   depends_on:
+    #     - todo-db
+    # todo-db:
+    #   container_name: todo-db
+    #   image: mariadb:latest
+    #   networks: 
+    #     - todo-bd
+    #   enviromnent:
+    #     - MARIADB_ROOT_PASSWORD=123456 
+    #     - MARIADB_DATABASE=todo
+networks:
+    todo-web: {}
+    todo-db: {}

@@ -1,0 +1,12 @@
+- Creació projecte:
+
+1.- docker build -t todo-builder .
+2.- docker run -it --rm -v ${PWD}:/app todo-builder "npm create vue@latest"
+3.- docker run -it --rm -v ${PWD}/todo-front:/app todo-builder "npm install"
+4.- docker run -it --rm -p 5173:5173 -v ${pwd}/todo-front:/app todo-builder "npm run dev"
+5.- docker run -it --rm -v ${pwd}:/app todo-builder "composer create-project --prefer-dist laravel/lumen todo-api"
+5.1.- docker run -it --rm -v ${PWD}/todo-api:/app todo-builder "composer install" 
+6.- docker run -it --rm -p 8080:8080 -v ${pwd}/todo-api:/app todo-builder "php -S 0.0.0.0:8080 -t public"
+7.- docker run -d --name todo-mariadb --env MARIADB_ROOT_PASSWORD=123456  mariadb:latest
+7.1.- docker exec -it todo-mariadb bash
+7.2.- AMB BD!!! docker run -d --name todo-mariadb --env MARIADB_ROOT_PASSWORD=123456 --env MARIADB_DATABASE=todo --network=todo_network  mariadb:latest
